@@ -1,6 +1,22 @@
-# TODO (CP2): file này quyết định thứ KHÔNG được copy vào image.
-# Bỏ sót .env = leak secret vào image. Bỏ sót .git = image phình to.
-# Bổ sung đủ các mục còn thiếu — xem tests/test_cp2.py để biết yêu cầu.
+# Giữ bí mật và giảm dung lượng build context
+.env
+.env.*
+!.env.example
 
+# Git metadata
 .git
 .gitignore
+
+# Python virtual environment and cache
+.venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+
+# Tests, benchmarks & docs
+tests
+*.md
+screenshots
+nginx
