@@ -23,14 +23,12 @@ class Lifecycle:
         self._previous: dict = {}
 
     def request_shutdown(self, signum=None, frame=None) -> None:
-        """Signal handler: đánh dấu process đang tắt dần."""
         self.shutting_down = True
         previous = self._previous.get(signum)
         if callable(previous):
             previous(signum, frame)
 
     def install(self) -> None:
-        """Đăng ký handler cho SIGTERM và SIGINT, nhớ lại handler cũ."""
         for sig in (signal.SIGTERM, signal.SIGINT):
             self._previous[sig] = signal.getsignal(sig)
             signal.signal(sig, self.request_shutdown)
